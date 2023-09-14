@@ -10,13 +10,17 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
 	const [courses, setCourses] = useState([]);
 	const [coursesName, setCoursesName] = useState([]);
+	const [remainingCredit, setRemainingCredit] = useState(0);
+	const [totalCredit, setTotalCredit] = useState(0);
+	const [totalPrice, setTotalPrice] = useState(0);
 
-	const handleCourseName = (course, id) => {
-		// Check course object before set the sate
+	const handleClick = (course, id) => {
+		let creditCount = course.credit;
+		let totalCredit = 20;
+
 		const isSimillarCourse = coursesName.find(
 			(courseName) => courseName.id === id,
 		);
-
 		if (isSimillarCourse) {
 			toast.error("🦄 Already Added!", {
 				position: "top-center",
@@ -29,10 +33,46 @@ function App() {
 				theme: "colored",
 			});
 			return;
-		}
+		} else {
+			coursesName.forEach(
+				(course) => (creditCount = course.credit + creditCount),
+			);
+			console.log(creditCount);
+			if (creditCount > 20) {
+				toast.warn("Credit Limit", {
+					position: "top-center",
+					autoClose: 1000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "colored",
+				});
+				return;
+			} else {
+				let remainingCredit = totalCredit - creditCount;
+				setRemainingCredit(remainingCredit);
+				if (remainingCredit < 0) {
+					toast.warn("No Credit Remaining", {
+						position: "top-center",
+						autoClose: 1000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						theme: "colored",
+					});
+					return;
+				}
+				setTotalCredit(creditCount);
+			}
 
-		// Set courname obj to the state
-		setCoursesName([...coursesName, course]);
+			setTotalPrice(totalPrice + course.price);
+			// Set courname obj to the state
+			setCoursesName([...coursesName, course]);
+		}
 	};
 
 	useEffect(() => {
@@ -48,11 +88,13 @@ function App() {
 			<Header />
 			{/* Middle */}
 			<div className="container mx-auto flex sm:flex-col lg:flex-row justify-between gap-5 pb-20">
-				<Courses
-					courses={courses}
-					handleCourseName={handleCourseName}
+				<Courses courses={courses} handleClick={handleClick} />
+				<Cart
+					coursesName={coursesName}
+					totalCredit={totalCredit}
+					totalPrice={totalPrice}
+					remainingCredit={remainingCredit}
 				/>
-				<Cart coursesName={coursesName} />
 			</div>
 		</>
 	);
