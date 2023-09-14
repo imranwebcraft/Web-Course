@@ -19,7 +19,7 @@ function App() {
 			{/* Top */}
 			<Header />
 			{/* Middle */}
-			<div className="container mx-auto flex sm:flex-col lg:flex-row justify-between gap-2">
+			<div className="container mx-auto flex sm:flex-col lg:flex-row justify-between gap-2 pb-20">
 				<Courses courses={courses} />
 				<Cart />
 			</div>
