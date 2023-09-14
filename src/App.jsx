@@ -38,7 +38,7 @@ function App() {
 				(course) => (creditCount = course.credit + creditCount),
 			);
 			if (creditCount > 20) {
-				toast.warn("Credit Limit Please Check Your Remaining Credit", {
+				toast.warn("Credit Limit! Please Check Your Remaining Credit", {
 					position: "top-center",
 					autoClose: 1000,
 					hideProgressBar: false,
