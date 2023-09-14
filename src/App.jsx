@@ -37,9 +37,8 @@ function App() {
 			coursesName.forEach(
 				(course) => (creditCount = course.credit + creditCount),
 			);
-			console.log(creditCount);
 			if (creditCount > 20) {
-				toast.warn("Credit Limit", {
+				toast.warn("Credit Limit Please Check Your Remaining Credit", {
 					position: "top-center",
 					autoClose: 1000,
 					hideProgressBar: false,
