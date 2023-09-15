@@ -22,7 +22,7 @@ function App() {
 			(courseName) => courseName.id === id,
 		);
 		if (isSimillarCourse) {
-			toast.error("🦄 Already Added!", {
+			toast.error("Already Added!", {
 				position: "top-center",
 				autoClose: 1000,
 				hideProgressBar: false,

@@ -49,7 +49,7 @@ const Course = ({ course, handleClick }) => {
 							handleClick(course, id);
 						}}
 					>
-						<button className=" py-2 rounded-md w-full bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition-all duration-200 ease-in">
+						<button className=" py-2 rounded-md w-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-700 transition-all duration-200 ease-in">
 							Select
 						</button>
 					</div>
